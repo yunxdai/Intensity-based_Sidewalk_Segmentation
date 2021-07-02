@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+    <rosparam command="load" file="$(find lidar_road)/params/single_ground_fit.yaml"/>
+
+    <!-- <arg name=”gf_node_name” value=”ground_filter”/> -->
+
+
+    <node name="intensity_filter" pkg="lidar_road" type="intensity_filter_node" output="screen"/>
+    <node name="ground_filter" pkg="lidar_road" type="ground_filter_node" output="screen">
+        <param name="input_topic" value="/velodyne_points"/>
+        <rosparam command="load" file="$(find lidar_road)/params/ground_filter.yaml"/>
+    </node>
+    <!-- <node name="edge_extractor" pkg="my_pcl" type="edge_extraction_node" output="screen"/> -->
+    
+    <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find my_pcl)/config/test.rviz" required="true" /> -->
+    <!-- <node name="play" pkg="rosbag" type="play" args=" $(find my_pcl)/data/husky1-CURB-1208-NIGHT_SIDEWALK.bag"/> -->
+    
+    
+
+</launch>   

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="intensity_map" pkg="my_pcl" type="intensity_map_node" output="screen"/>
+    <node name="grid_map_visualization" pkg="grid_map_visualization" type="grid_map_visualization" output="screen">
+        <param name="grid_map_topic" value="/grid_map"/>
+        <rosparam command="load" file="$(find my_pcl)/param/intensity_map.yaml" />
+    </node>
+    <node name="play" pkg="rosbag" type="play" args=" $(find my_pcl)/data/husky1-CURB-1208-NIGHT_SIDEWALK.bag"/>
+    
+
+</launch>

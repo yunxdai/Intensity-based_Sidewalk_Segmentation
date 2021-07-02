@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+    <rosparam command="load" file="$(find my_pcl)/param/double_ground_fit.yaml"/>
+
+   
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find my_pcl)/config/test_ground.rviz" required="true" />
+    <node name="play" pkg="rosbag" type="play" args=" $(find my_pcl)/data/husky1-CURB-1207-NOON_SIDEWALK.bag"/>
+    
+    <!-- <node name="pre_ground_filter" pkg="my_pcl" type="ground_filter_node" output="screen"/> -->
+    <node name="pre_ground_filter" pkg="my_pcl" type="ground_filter_node" output="screen">
+        <param name="pb_road_topic" value="/velodyne_points"/>
+        <param name="pb_postprocess_topic" value="/pre_road_points"/>
+    </node>
+    <node name="reflection" pkg="my_pcl" type="reflection_node" output="screen">
+        <param name="input_pointcloud" value="/pre_road_points"/>
+        <param name="pb_ground_topic" value="/ground_points"/>
+        <param name="pb_road_topic" value="/road_points"/>
+    </node>
+    <node name="post_ground_filter" pkg="my_pcl" type="ground_filter_node" output="screen">
+        <param name="pb_road_topic" value="/road_points"/>
+        <param name="pb_postprocess_topic" value="/final_road_points"/>
+        <!-- <param name="input_pointcloud" value="/pre_road_points"/> -->
+        <!-- <param name="pb_postprocess_topic" value="/velodyne_points"/> -->
+    </node>
+</launch>   

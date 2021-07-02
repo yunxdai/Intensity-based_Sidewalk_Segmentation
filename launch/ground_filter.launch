@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="ground_filter" pkg="lidar_road" type="ground_filter_node" output="screen">
+        <param name="input_topic" value="/velodyne_cloud_registered_output"/>
+        <rosparam command="load" file="$(find lidar_road)/params/ground_filter.yaml"/>
+    </node>
+</launch>

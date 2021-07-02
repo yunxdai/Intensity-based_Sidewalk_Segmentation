@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+    <rosparam command="load" file="$(find lidar_road)/params/test.yaml"/>
+
+    <node name="intensity_filter" pkg="lidar_road" type="intensity_filter_node" output="screen"/>
+    
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find lidar_road)/config/test.rviz" required="true" />
+    <node name="play" pkg="rosbag" type="play" args=" $(find lidar_road)/data/husky1-CURB-1208-NIGHT_SIDEWALK.bag"/>
+    
+    
+
+</launch>   
